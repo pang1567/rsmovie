@@ -29,8 +29,13 @@
       <file leaf-file-name="login.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/login.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.19095477" vertical-offset="0" max-vertical-offset="398">
               <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+=======
+            <state vertical-scroll-proportion="0.09547739" vertical-offset="0" max-vertical-offset="398">
+              <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+>>>>>>> 18dec9207414d896887bfa8fedb9410fa5a69e74
               <folding />
             </state>
           </provider>
@@ -340,8 +345,13 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/login.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.19095477" vertical-offset="0" max-vertical-offset="398">
           <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+=======
+        <state vertical-scroll-proportion="0.09547739" vertical-offset="0" max-vertical-offset="398">
+          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+>>>>>>> 18dec9207414d896887bfa8fedb9410fa5a69e74
           <folding />
         </state>
       </provider>
