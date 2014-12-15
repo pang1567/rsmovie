@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da304e99-849a-4f47-95f5-0748552205b3" name="Default" comment="pycharm setting">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kan_cookies.dat" afterPath="$PROJECT_DIR$/src/kan_cookies.dat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/login.py" afterPath="$PROJECT_DIR$/src/login.py" />
+    <list default="true" id="da304e99-849a-4f47-95f5-0748552205b3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="rsmovie.iws" />
@@ -349,7 +347,11 @@
       <created>1418610430033</created>
       <updated>1418610430033</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="pycharm setting">
+      <created>1418611109873</created>
+      <updated>1418611109873</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
