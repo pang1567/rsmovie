@@ -56,10 +56,15 @@ def login_dz(**parms):
         data=postdata
         )
     c = opener.open(req).read()
-    print c
+    #print c
     flag = '登陆失败 %s'%arg['username']
     if 'succeedhandle_login' in c:
         flag = True
+        reqmovie = urllib2.Request(
+            url= "http://rs.xidian.edu.cn/bt.php?mod=browse&c=10"
+        )
+        movie = opener.open(reqmovie).read()
+        print movie
     return flag
 
 
