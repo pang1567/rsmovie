@@ -55,7 +55,7 @@ def login_dz(**parms):
         url= arg['domain']+'member.php?mod=logging&action=login&loginsubmit=yes&handlekey=login&loginhash=LCaB3&inajax=1',
         data=postdata
         )
-    c = opener.open(req).read(300)
+    c = opener.open(req).read()
     print c
     flag = '登陆失败 %s'%arg['username']
     if 'succeedhandle_login' in c:
@@ -66,7 +66,7 @@ def login_dz(**parms):
 #使用例子：基本参数登陆
 user='pang1567'
 pwd='15071364050'
-dom='http://rs.xidian.edu.cn/' #另一个测试网站：http://www.kafan.cn/
+dom='http://rs.xidian.edu.cn/'
 try:
     flag = login_dz(username=user,password=pwd,domain=dom)
     print(flag)
