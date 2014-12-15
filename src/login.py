@@ -74,3 +74,5 @@ except Exception,e:
 
 #关于Http请求，参 fc-lamp.blog.163.com
 #关于python运算符的使用，参
+
+print('hello','world')
