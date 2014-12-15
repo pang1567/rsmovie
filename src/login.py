@@ -56,6 +56,7 @@ def login_dz(**parms):
         data=postdata
         )
     c = opener.open(req).read(300)
+    print c
     flag = '登陆失败 %s'%arg['username']
     if 'succeedhandle_login' in c:
         flag = True
