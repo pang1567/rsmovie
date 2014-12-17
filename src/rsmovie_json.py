@@ -2,7 +2,7 @@ import urllib2
 
 __author__ = 'lenovo'
 
-import login
+import login_rs
 
 import urllib2
 
@@ -16,7 +16,7 @@ doc = ['<html><head><title>Page title</title></head>',
        '</html>']
 
 
-print login.MOVIE
+print login_rs.MOVIE
 soup = BeautifulSoup(''.join(doc))
 
 print soup.prettify()

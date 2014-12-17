@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 __author__ = 'pang1567'
-# coding:utf-8
 import urllib2, urllib, cookielib, re
 
 '''
@@ -14,7 +14,27 @@ import urllib2, urllib, cookielib, re
 
   这里使用了可变关键字参数(相关信息可参考手册)
 '''
-class login():
+
+
+class login_rs():
+    def __init__(self):
+        self.cookieFile = './kan_cookies.dat'
+        self.cookie = cookielib.LWPCookieJar()
+        self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
+        self.formhash = ''  # 没有formhash不能发帖
+
+    def _get_formhash(self):
+        pre_login = arg[
+                        'domain'] + 'member.php?mod=logging&action=login&infloat=yes&handlekey=login&inajax=1&ajaxtarget=fwin_content_login'
+        c = self.opener.open(pre_login).read()
+        self.cookie.save(self.cookieFile)
+        patt = re.compile(r'.*?name="formhash".*?value="(.*?)".*?')
+        formhash_tmp = patt.search(c)
+        if not formhash_tmp:
+            raise Exception('GET formhash Fail!')
+        self.formhash = formhash_tmp.group(1)
+    def _
+
 def login_dz(**parms):
     # 初始化
     parms_key = ['domain', 'answer', 'password', 'questionid', 'referer', 'username']
@@ -25,7 +45,7 @@ def login_dz(**parms):
         else:
             arg[key] = ''
 
-    #cookie设置
+    # cookie设置
     cookieFile = './kan_cookies.dat'
     cookie = cookielib.LWPCookieJar()
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
@@ -53,7 +73,8 @@ def login_dz(**parms):
 
     post_data = urllib.urlencode(postdata)
     req = urllib2.Request(
-        url=arg['domain']+'member.php?mod=logging&action=login&loginsubmit=yes&handlekey=login&loginhash=LCaB3&inajax=1',
+        url=arg[
+                'domain'] + 'member.php?mod=logging&action=login&loginsubmit=yes&handlekey=login&loginhash=LCaB3&inajax=1',
         data=post_data
     )
     c = opener.open(req).read()
@@ -61,8 +82,8 @@ def login_dz(**parms):
     login_flag = '登陆失败 %s' % arg['username']
     if 'succeedhandle_login' in c:
         reqmovie = urllib2.Request(
-            url= "http://rs.xidian.edu.cn/bt.php?mod=browse&c=10"
-    )
+            url="http://rs.xidian.edu.cn/bt.php?mod=browse&c=10"
+        )
     MOVIE = opener.open(reqmovie).read()
     print  MOVIE
     login_flag = True
@@ -80,6 +101,6 @@ try:
 except Exception, e:
     print ('Error:', e)
 
-#关于Http请求，参 fc-lamp.blog.163.com
+# 关于Http请求，参 fc-lamp.blog.163.com
 #关于python运算符的使用，参
 
