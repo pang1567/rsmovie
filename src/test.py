@@ -1,7 +1,11 @@
 __author__ = 'pang1567'
 #coding:utf-8
-import urllib2,urllib,cookielib,re
+import urllib2
+import urllib
+import cookielib
+import re
 
+import Op
 '''
   通用的登陆DZ论坛
   参数说明parms:
