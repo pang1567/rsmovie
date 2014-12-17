@@ -14,7 +14,7 @@ import urllib2, urllib, cookielib, re
 
   这里使用了可变关键字参数(相关信息可参考手册)
 '''
-
+class login():
 def login_dz(**parms):
     # 初始化
     parms_key = ['domain', 'answer', 'password', 'questionid', 'referer', 'username']
