@@ -91,8 +91,8 @@ def login_dz(**parms):
 
 
 # 使用例子：基本参数登陆
-user = 'pang1567'
-pwd = '15071364050'
+user = ''
+pwd = ''
 dom = 'http://rs.xidian.edu.cn/'
 MOVIE = 0
 try:
