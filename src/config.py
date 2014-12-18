@@ -1,12 +1,12 @@
-# -*- coding: utf-8 -*-
 __author__ = 'lenovo'
+# -*- coding: utf-8 -*-
 
-DOMAIN = r'http://rs.xidian.edu.cn/'
-USERNAME = r''
-PASSWORD = r''
+DOMAIN = 'http://rs.xidian.edu.cn/'
+USERNAME = 'pang1567'
+PASSWORD = '15071364050'
 
-LOGINFIELD = r'username'
+LOGINFIELD = 'username'
 COOKIETIME = 2592000
 
-HOMEURL = DOMAIN + r'forum.php'
-LOGINURL = DOMAIN + r'member.php?mod=logging&action=login&loginsubmit=yes&handlekey=login&loginhash=LCaB3&inajax=1'
+HOMEURL = DOMAIN + 'forum.php'
+LOGINURL = DOMAIN + 'member.php?mod=logging&action=login&loginsubmit=yes&handlekey=login&loginhash=LCaB3&inajax=1'

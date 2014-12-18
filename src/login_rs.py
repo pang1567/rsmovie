@@ -1,106 +1,67 @@
+__author__ = 'lenovo'
 # -*- coding: utf-8 -*-
-__author__ = 'pang1567'
-import urllib2, urllib, cookielib, re
 
-'''
-  通用的登陆DZ论坛
-  参数说明parms:
-      username:用户名(必填),
-      password :密码(必填),
-      domain:网站域名，注意格式必须是：http://www.xxx.xx/(必填),
-      answer:问题答案,
-      questionid:问题ID,
-      referer:跳转地址
+import urllib
+import urllib2
+import cookielib
+import re
 
-  这里使用了可变关键字参数(相关信息可参考手册)
-'''
+import config
 
 
-class login_rs():
+class Discuz(object):
     def __init__(self):
-        self.cookieFile = './kan_cookies.dat'
-        self.cookie = cookielib.LWPCookieJar()
-        self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
+        self.operate = ''  # response的对象（不含read）
         self.formhash = ''  # 没有formhash不能发帖
 
-    def _get_formhash(self):
-        pre_login = arg[
-                        'domain'] + 'member.php?mod=logging&action=login&infloat=yes&handlekey=login&inajax=1&ajaxtarget=fwin_content_login'
-        c = self.opener.open(pre_login).read()
-        self.cookie.save(self.cookieFile)
-        patt = re.compile(r'.*?name="formhash".*?value="(.*?)".*?')
-        formhash_tmp = patt.search(c)
-        if not formhash_tmp:
-            raise Exception('GET formhash Fail!')
-        self.formhash = formhash_tmp.group(1)
-    def _
+        self.cj = cookielib.CookieJar()
+        self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.cj))
+        urllib2.install_opener(self.opener)
 
-def login_dz(**parms):
-    # 初始化
-    parms_key = ['domain', 'answer', 'password', 'questionid', 'referer', 'username']
-    arg = {}
-    for key in parms_key:
-        if key in parms:
-            arg[key] = parms[key]
-        else:
-            arg[key] = ''
+        self.formhash_pattern = re.compile(r'<input type="hidden" name="formhash" value="([0-9a-zA-Z]+)" />')
 
-    # cookie设置
-    cookieFile = './kan_cookies.dat'
-    cookie = cookielib.LWPCookieJar()
-    opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
+    def login(self, username, password, questionid=0, answer=''):
+        postdata = {
+            #'loginfield': config.LOGINFIELD,
+            'username': username,
+            'password': password,
+            'questionid': questionid,
+            'answer': answer,
+            'referer' : 'http://rs.xidian.edu.cn/'
+            #'cookietime': config.COOKIETIME,
+        }
 
-    #获取formhash
-    pre_login = arg[
-                    'domain'] + 'member.php?mod=logging&action=login&infloat=yes&handlekey=login&inajax=1&ajaxtarget=fwin_content_login'
-    c = opener.open(pre_login).read()
-    cookie.save(cookieFile)
-    patt = re.compile(r'.*?name="formhash".*?value="(.*?)".*?')
-    formhash = patt.search(c)
-    if not formhash:
-        raise Exception('GET formhash Fail!')
-    formhash = formhash.group(1)
-
-    #登陆
-    postdata = {
-        'answer': arg['answer'],
-        'formhash': formhash,
-        'password': arg['password'],
-        'questionid': 0 if arg['questionid'] == '' else arg['questionid'],
-        'referer': arg['domain'] if arg['referer'] == '' else arg['referer'],
-        'username': arg['username'],
-    }
-
-    post_data = urllib.urlencode(postdata)
-    req = urllib2.Request(
-        url=arg[
-                'domain'] + 'member.php?mod=logging&action=login&loginsubmit=yes&handlekey=login&loginhash=LCaB3&inajax=1',
-        data=post_data
-    )
-    c = opener.open(req).read()
-    #print c
-    login_flag = '登陆失败 %s' % arg['username']
-    if 'succeedhandle_login' in c:
+        # 取得登录成功/失败的提示信息
+        self.operate = self._get_response(config.LOGINURL, postdata)
+        '''
+        print self.operate.read()
         reqmovie = urllib2.Request(
             url="http://rs.xidian.edu.cn/bt.php?mod=browse&c=10"
         )
-    MOVIE = opener.open(reqmovie).read()
-    print  MOVIE
-    login_flag = True
-    return login_flag
+        MOVIE = self.opener.open(reqmovie).read()
+        print  MOVIE
+        '''
+        login_tip_page = self.operate.read()
 
+        # 显示登录成功/失败信息
+        if 'succeedhandle_login' in login_tip_page:
+            self.formhash = self._get_formhash(self._get_response(config.HOMEURL).read())
+            print '登录成功'
+            return True
+        else:
+            print '无法获取登录状态'
 
-# 使用例子：基本参数登陆
-user = ''
-pwd = ''
-dom = 'http://rs.xidian.edu.cn/'
-MOVIE = 0
-try:
-    flag = login_dz(username=user, password=pwd, domain=dom)
-    print(flag)
-except Exception, e:
-    print ('Error:', e)
+        return False
 
-# 关于Http请求，参 fc-lamp.blog.163.com
-#关于python运算符的使用，参
+    def _get_response(self, url, data=None):
+        if data is not None:
+            req = urllib2.Request(url, urllib.urlencode(data))
+        else:
+            req = urllib2.Request(url)
 
+        response = self.opener.open(req)
+        return response
+
+    def _get_formhash(self, page_content):
+        self.formhash = self.formhash_pattern.search(page_content.decode('utf-8')).group(1)
+        return self.formhash
