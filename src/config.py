@@ -2,8 +2,8 @@ __author__ = 'lenovo'
 # -*- coding: utf-8 -*-
 
 DOMAIN = u'http://rs.xidian.edu.cn/'
-USERNAME = u'pang1567'
-PASSWORD = u'15071364050'
+USERNAME = u'***'
+PASSWORD = u'***'
 
 LOGINFIELD = u'username'
 COOKIETIME = 2592000
