@@ -98,7 +98,7 @@ class Movie():
         for i in self.movie_list:
             print i[1]
         '''
-        output = open('data.md', 'w')
+        output = open('data1.md', 'w')
         for tup in self.movie_list:
             str = '|' + tup[0] + '|' + tup[1] + '|' + '[' + tup[2] + ']' + '(' + tup[2] + ')' + '|'
             str1 = str.encode('gbk')
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     my_account = login_rs.Discuz()
     my_account.login(config.USERNAME, config.PASSWORD)
     movie = Movie()
-    for page in range(1, 5):
+    for page in range(1, 3):
         #检索第一到第四页睿思电影列表
         rs_html = my_account._get_response('http://rs.xidian.edu.cn/bt.php?mod=browse&c=10&page=' + str(page))
         movie.parse_movie(rs_html)
